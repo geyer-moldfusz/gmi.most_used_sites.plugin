@@ -1,4 +1,5 @@
 var main = require("../");
+var tabs = require("sdk/tabs");
 
 exports["test main"] = function(assert) {
   assert.pass("Unit test running!");
@@ -15,5 +16,18 @@ exports["test dummy"] = function(assert, done) {
     done();
   });
 };
+/*
+#exports["test onOpen"] = function(assert, done) {
+#  tabs.open({
+#    url: "http://www.example.com",
+#    onReady: function onReady(tab) {
+#      assert.ok((tab.accessed instanceof Date), "Tab stored last access time");
+#      tab.close(function onClose() {
+#        done();
+#      });
+#    }
+#  });
+#};
+*/
 
 require("sdk/test").run(exports);
