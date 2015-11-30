@@ -1,13 +1,12 @@
-//var EventTarget = require("sdk/event/target");
-
-//var ReportManager = new EventTarget();
-
 function Reporter() {
-  this.target = 'localhost:8080';
-
-  this.changed = function(vevent) {
-    console.log(vevent.url + "\t" + vevent.duration);
-  };
+  var target = 'localhost:8080';
+  var visits = [];
 }
 
-exports.reporter = Reporter;
+Reporter.prototype.append = function(visit) {
+    console.log('### ' + visit.url);
+    visits.push(visit);
+  }
+}
+
+exports.Reporter = Reporter;
