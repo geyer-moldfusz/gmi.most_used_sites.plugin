@@ -12,5 +12,11 @@
   "license": "GPLv3",
   "keywords": [
     "jetpack"
-  ]
+  ],
+  "preferences": [{
+    "name": "unique_id",
+    "type": "string",
+    "title": "Unique user id",
+    "value": "_undefined"
+  }]
 }
