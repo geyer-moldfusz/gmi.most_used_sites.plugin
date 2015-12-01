@@ -1,11 +1,29 @@
-function Reporter() {
-  var target = 'localhost:8080';
-  var visits = [];
-}
+// http://robdodson.me/javascript-design-patterns-singleton/
 
-Reporter.prototype.append = function(visit) {
-  console.log('### ' + visit.url);
-  visits.push(visit);
-}
+var Reporter = (function () {
+  var instance;
 
-exports.Reporter = Reporter;
+  function init() {
+    var target = 'localhost:8080';
+    var visits = [];
+
+    return {
+      foo: "bar",
+      append: function(visit) {
+        console.log('### ' + visit.url);
+        visits.push(visit);
+      }
+    };
+  };
+
+  return {
+    getInstance: function() {
+      if (!instance) {
+        instance = init();
+      }
+      return instance;
+    }
+  };
+})();
+
+exports.getInstance = Reporter.getInstance;

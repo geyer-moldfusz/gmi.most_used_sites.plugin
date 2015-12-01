@@ -1,17 +1,20 @@
-var Reporter = require("../reporter.js").reporter;
+var Reporter = require("../reporter.js");
 
-/*exports["test Reporter"] = function(assert) {
-  var reporter = new Reporter();
-  assert.ok(reporter.target == "localhost:8080");
+exports["test Reporter"] = function(assert) {
+  var reporter = Reporter.getInstance();
+//  assert.ok(reporter.target == "localhost:8080");
+}
+
+exports["test Reporter is singleton"] = function(assert) {
+  var reporter_a = Reporter.getInstance();
+  var reporter_b = Reporter.getInstance();
+  assert.ok(reporter_a === reporter_b);
 }
 
 exports["test Visits"] = function(assert) {
-  var reporter = new Reporter();
+  var reporter = Reporter.getInstance();
   reporter.append("foo");
-  assert.ok(reporter.visits[0] == "foo");
+//  assert.ok(reporter.visits[0] == "foo");
 }
-*/
-//exports["test Reporter handles visit event"] = function(assert) {
-//  emit()
 
 require("sdk/test").run(exports);

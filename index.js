@@ -1,12 +1,12 @@
 var self = require("sdk/self");
 var tabs = require("sdk/tabs");
 var Visit = require("./visit").Visit;
-var Reporter = require("./reporter").Reporter;
+var Reporter = require("./reporter");
 
 
 function onOpen(tab) {
   var accessed = new Date();
-  var reporter = new Reporter();
+  var reporter = Reporter.getInstance();
 
   ["pageshow", "activate", "deactivate", "close"].map( function(e) {
     tab.on(e, function(t) {
