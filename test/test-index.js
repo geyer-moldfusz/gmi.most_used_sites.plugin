@@ -30,4 +30,20 @@ exports["test dummy"] = function(assert, done) {
 #};
 */
 
-//require("sdk/test").run(exports);
+exports["test onOpen"] = function(assert) {
+  var tabs = {
+    events: [],
+    on: function(k, _) {
+      this.events.push(k);
+    }
+  };
+
+  main.onOpen(tabs);
+  assert.ok(tabs.events.indexOf("foo") == -1);
+  assert.ok(tabs.events.indexOf("pageshow") != -1);
+  assert.ok(tabs.events.indexOf("activate") != -1);
+  assert.ok(tabs.events.indexOf("deactivate") != -1);
+  assert.ok(tabs.events.indexOf("close") != -1);
+}
+
+require("sdk/test").run(exports);

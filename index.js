@@ -1,7 +1,7 @@
 var self = require("sdk/self");
 var tabs = require("sdk/tabs");
 var Visit = require("./visit").Visit;
-var Reporter = require("./reporter").reporter;
+var Reporter = require("./reporter").Reporter;
 
 
 function onOpen(tab) {

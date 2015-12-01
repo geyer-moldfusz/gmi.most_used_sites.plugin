@@ -4,9 +4,8 @@ function Reporter() {
 }
 
 Reporter.prototype.append = function(visit) {
-    console.log('### ' + visit.url);
-    visits.push(visit);
-  }
+  console.log('### ' + visit.url);
+  visits.push(visit);
 }
 
 exports.Reporter = Reporter;
