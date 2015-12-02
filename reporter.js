@@ -13,15 +13,22 @@ var Reporter = (function () {
       console.log('### commit');
       var target = "http://localhost:8080/visits/" + ID.unique_id();
 
-      var data = Request({
+      var req = Request({
         url: target,
-        content: "",
+        contentType: 'application/json',
+        content: JSON.stringify({
+          visits: visits.map(function (v) {
+            v.visited_at = v.visited_at.getTime();
+            return v;
+          })
+        }),
         onComplete: function(response) {
-          console.log(response.status);
+          // XXX this is evil
+          visits = [];
         }
       });
 
-      data.post()
+      req.post();
     };
 
     setInterval(commit, 1000);
