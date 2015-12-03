@@ -10,9 +10,9 @@ exports["test Visit"] = function(assert) {
 
 exports["test submit"] = function(assert) {
   var visit = new Visit("foo", new Date(2105, 11, 30), 1, false);
-  visit.submit(function (v) {
+  visit.register({append: function (v) {
     assert.ok(v.url == "foo");
-  });
+  }});
 }
 
 require("sdk/test").run(exports);

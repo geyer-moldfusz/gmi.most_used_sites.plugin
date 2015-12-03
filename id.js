@@ -12,20 +12,17 @@ function* randCharMaker(rdng) {
   }
 }
 
-
 var ID = function(genID) {
 
   var unique_id = function() {
     if (preferences.unique_id.length != 24) {
       preferences.unique_id = genID(24);
     }
-
     return preferences.unique_id;
-  }
+  };
 
   return unique_id;
 }
-
 
 exports.randCharMaker = randCharMaker;
 exports.unique_id = ID(function(len) {
