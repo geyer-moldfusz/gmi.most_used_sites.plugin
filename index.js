@@ -20,12 +20,29 @@ var onOpen = function(tab) {
 
   tab.on("activate", registerVisit(false));
   tab.on("deactivate", registerVisit(true));
+
   tab.on("close", function(t) {
     registerVisit(tabs.activeTab == t)(t);
   });
+
   tab.on("pageshow", function(t) {
     registerVisit(tabs.activeTab == t)(t);
+
+    // we also need to access the unload event for the loaded page
+    var worker = t.attach({
+      contentScriptFile: self.data.url("unload.js")
+    });
+    worker.port.on("unload", function(_) {
+      // this event may be fired in case the tab is already about to be closed
+      try {
+        registerVisit(tabs.activeTab == t)(t);
+      } catch(e) {
+        if (e.message == "tab is undefined") return;  // the close event already handled this situation
+        throw(e);
+      }
+    });
   });
+
 };
 
 tabs.on('open', onOpen);
