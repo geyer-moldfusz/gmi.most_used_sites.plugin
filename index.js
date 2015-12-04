@@ -18,24 +18,31 @@ var onOpen = function(tab) {
     };
   };
 
+  windows.on("activate", function(w) {
+    if (w.tabs.activeTab == tab) registerVisit(false)(tab);
+  });
+  windows.on("deactivate", function(w) {
+    if (w.tabs.activeTab == tab) registerVisit(true)(tab);
+  });
+
   tab.on("activate", registerVisit(false));
   tab.on("deactivate", registerVisit(true));
 
-  tab.on("close", function(t) {
-    registerVisit(tabs.activeTab == t)(t);
+  tab.on("close", function(_) {
+    registerVisit(tabs.activeTab == tab)(tab);
   });
 
-  tab.on("pageshow", function(t) {
-    registerVisit(tabs.activeTab == t)(t);
+  tab.on("pageshow", function(_) {
+    registerVisit(tabs.activeTab == tab)(tab);
 
     // we also need to access the unload event for the loaded page
-    var worker = t.attach({
+    var worker = tab.attach({
       contentScriptFile: self.data.url("unload.js")
     });
     worker.port.on("unload", function(_) {
       // this event may be fired in case the tab is already about to be closed
       try {
-        registerVisit(tabs.activeTab == t)(t);
+        registerVisit(tabs.activeTab == tab)(tab);
       } catch(e) {
         if (e.message == "tab is undefined") return;  // the close event already handled this situation
         throw(e);
