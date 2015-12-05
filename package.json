@@ -1,22 +1,26 @@
 {
-  "title": "Most used sites Addon",
+  "title": "Most used sites",
   "name": "mostusedsites",
-  "version": "0.0.1",
-  "description": "A basic add-on",
+  "version": "0.1.0",
+  "description": "An AddOn to track surfing behavior",
   "main": "index.js",
-  "author": "Stefan Walluhn",
+  "author": "Geyer-Moldfusz",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "keywords": [
-    "jetpack"
+    "jetpack",
+    "geyer-moldfusz",
+    "geyer",
+    "moldfusz",
+    "mostusedsites"
   ],
   "preferences": [{
     "name": "unique_id",
     "type": "string",
-    "title": "Unique user id",
-    "value": "_undefined"
+    "title": "User ID",
+    "value": "_unset_"
   }]
 }
