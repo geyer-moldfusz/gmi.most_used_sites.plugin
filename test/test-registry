@@ -1,0 +1,20 @@
+var Registry = require("../registry.js");
+
+exports["test Registry"] = function(assert) {
+  var registry = Registry.getInstance();
+//  assert.ok(registry.target == "localhost:8080");
+}
+
+exports["test Registry is singleton"] = function(assert) {
+  var registry_a = Registry.getInstance();
+  var registry_b = Registry.getInstance();
+  assert.ok(registry_a === registry_b);
+}
+
+exports["test Visits"] = function(assert) {
+  var registry = Registry.getInstance();
+  registry.append("foo");
+//  assert.ok(registry.visits[0] == "foo");
+}
+
+require("sdk/test").run(exports);

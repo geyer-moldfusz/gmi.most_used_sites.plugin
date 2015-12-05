@@ -4,7 +4,7 @@ var { setInterval } = require("sdk/timers");
 var ID = require("./id");
 var Transmitter = require("./transmitter").Transmitter;
 
-var Reporter = (function () {
+var Registry = (function () {
   var instance;
   var target = "http://localhost:8080/visits/" + ID.unique_id();
 
@@ -23,7 +23,7 @@ var Reporter = (function () {
     var onServerError = function(data) {
       console.log("Commit: server error");
       // we have to try again later
-      visits.push.apply(visits, data.visits);
+      visits.push.apply(visits, data);
     };
 
     var transmitter = new Transmitter(
@@ -48,7 +48,7 @@ var Reporter = (function () {
 
       if (t_visits.length > 0) {
         console.log('Commit: start transmission');
-        transmitter.submit({visits: t_visits});
+        transmitter.submit(t_visits);
         return;
       }
       console.log('Commit: nothing to commit');
@@ -77,4 +77,4 @@ var Reporter = (function () {
   };
 })();
 
-exports.getInstance = Reporter.getInstance;
+exports.getInstance = Registry.getInstance;

@@ -2,18 +2,18 @@ var self = require("sdk/self");
 var tabs = require("sdk/tabs");
 var windows = require("sdk/windows").browserWindows;
 var Visit = require("./visit").Visit;
-var Reporter = require("./reporter");
+var Registry = require("./registry");
 
 
 var onOpen = function(tab) {
-  var reporter = Reporter.getInstance();
+  var registry = Registry.getInstance();
   tab.accessed = new Date();
 
   var registerVisit = function(was_active) {
     return function(t) {
       var now = new Date();
       var visit = new Visit(t.url, now, now-t.accessed, was_active);
-      visit.register(reporter);
+      visit.register(registry);
       t.accessed = now;
     };
   };
@@ -59,7 +59,7 @@ for (let tab of tabs) {
 }
 
 windows.on('close', function(_) {
-  Reporter.getInstance().flush();
+  Registry.getInstance().flush();
 });
 
 exports.onOpen = onOpen;

@@ -6,7 +6,7 @@ var Transmitter = function(target, onSuccess, onClientError, onServerError) {
     var req = Request({
       url: target,
       contentType: 'application/json',
-      content: JSON.stringify(data),
+      content: JSON.stringify({visits: data}),
       onComplete: function(result) {
         if (result.status < 400) {
           onSuccess(data);
