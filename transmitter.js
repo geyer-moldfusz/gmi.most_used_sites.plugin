@@ -1,6 +1,7 @@
 var Request = require("sdk/request").Request;
 
-var Transmitter = function(target, onSuccess, onClientError, onServerError) {
+var Transmitter = function(
+  target, onSuccess, onClientError, onServerError, onNetworkError) {
 
   this.submit = function(data) {
     var req = Request({
@@ -8,6 +9,10 @@ var Transmitter = function(target, onSuccess, onClientError, onServerError) {
       contentType: 'application/json',
       content: JSON.stringify({visits: data}),
       onComplete: function(result) {
+        if (result.status == 0) {
+          onNetworkError(data);
+          return;
+        }
         if (result.status < 400) {
           onSuccess(data);
           return;

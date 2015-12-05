@@ -26,8 +26,14 @@ var Registry = (function () {
       visits.push.apply(visits, data);
     };
 
+    var onNetworkError = function(data) {
+      console.log("Commit: network error");
+      // we have to try again later
+      visits.push.apply(visits, data);
+    };
+
     var transmitter = new Transmitter(
-      target, onSuccess, onClientError, onServerError);
+      target, onSuccess, onClientError, onServerError, onNetworkError);
 
     var commit = function() {
       var t_visits = [];
