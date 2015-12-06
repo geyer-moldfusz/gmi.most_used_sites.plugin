@@ -1,6 +1,6 @@
 // http://robdodson.me/javascript-design-patterns-singleton/
 
-var { setInterval } = require("sdk/timers");
+var setInterval = require("sdk/timers").setInterval;
 var ID = require("./id");
 var Transmitter = require("./transmitter").Transmitter;
 

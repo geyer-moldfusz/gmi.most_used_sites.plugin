@@ -13,10 +13,23 @@
   "keywords": [
     "jetpack"
   ],
-  "preferences": [{
-    "name": "unique_id",
-    "type": "string",
-    "title": "Unique user id",
-    "value": "_undefined"
-  }]
+  "preferences": [
+    {
+      "name": "unique_id",
+      "type": "string",
+      "title": "Unique user id",
+      "value": "_undefined"
+    }
+  ],
+  "dependencies": {
+    "jpm": "^1.0.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-jasmine-firefoxaddon": "^0.3.2",
+    "grunt-jpm": "^0.1.2",
+    "grunt-mozilla-addon-sdk": "^0.4.0",
+    "jasmine": "^2.4.1"
+  }
 }
