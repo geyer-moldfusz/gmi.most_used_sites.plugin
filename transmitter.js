@@ -7,7 +7,10 @@ var Transmitter = function(
     var req = Request({
       url: target,
       contentType: 'application/json',
-      content: JSON.stringify({visits: data}),
+      content: JSON.stringify({visits: data}, function(key, value) {
+        if (key == "visited_at") return this.visited_at.getTime();
+        return value;
+      }),
       onComplete: function(result) {
         if (result.status == 0) {
           onNetworkError(data);

@@ -41,14 +41,6 @@ var Registry = (function () {
       while (true) {
         visit = visits.shift();
         if (!visit) break;
-        console.log("\t"+JSON.stringify(visit));
-        // XXX this should by done by JSON serializer, not here
-        try {
-          visit.visited_at = visit.visited_at.getTime();
-        }
-        catch(err) {
-          if (err.name != "TypeError") throw(err);
-        }
         t_visits.push(visit);
       }
 
