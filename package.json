@@ -5,6 +5,8 @@
   "description": "An AddOn to track surfing behavior",
   "main": "index.js",
   "author": "Geyer-Moldfusz",
+  "updateURL": "https://addons.guerilla-it.net/mostusedsites/update.rdf",
+  "updateLink": "https://addons.guerilla-it.net/mostusedsites/mostusedsites.xpi",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
