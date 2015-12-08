@@ -1,9 +1,13 @@
+var ID = require("./id");
 var Request = require("sdk/request").Request;
+var preferences = require('sdk/simple-prefs').prefs;
 
 var Transmitter = function(
-  target, onSuccess, onClientError, onServerError, onNetworkError) {
+  onSuccess, onClientError, onServerError, onNetworkError) {
 
   this.submit = function(data) {
+    var target = preferences.api_url + "/visits/" + ID.unique_id();
+    console.log(target);
     var req = Request({
       url: target,
       contentType: 'application/json',

@@ -1,12 +1,10 @@
 // http://robdodson.me/javascript-design-patterns-singleton/
 
 var { setInterval } = require("sdk/timers");
-var ID = require("./id");
 var Transmitter = require("./transmitter").Transmitter;
 
 var Registry = (function () {
   var instance;
-  var target = "http://localhost:8080/visits/" + ID.unique_id();
 
   function init() {
     var visits = [];
@@ -33,7 +31,7 @@ var Registry = (function () {
     };
 
     var transmitter = new Transmitter(
-      target, onSuccess, onClientError, onServerError, onNetworkError);
+      onSuccess, onClientError, onServerError, onNetworkError);
 
     var commit = function() {
       var t_visits = [];

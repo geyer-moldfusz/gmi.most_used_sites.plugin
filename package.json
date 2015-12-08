@@ -22,5 +22,10 @@
     "type": "string",
     "title": "User ID",
     "value": "_unset_"
+  }, {
+    "name": "api_url",
+    "type": "string",
+    "title": "API Address",
+    "value": "https://api.mostusedsites.guerilla-it.net"
   }]
 }
