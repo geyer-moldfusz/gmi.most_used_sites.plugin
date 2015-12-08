@@ -1,3 +1,5 @@
+var id = require("../id");
+var preferences = require("sdk/simple-prefs").prefs;
 var randCharMaker = require("../id").randCharMaker; 
 
 exports["test randCharMaker"] = function(assert) {
@@ -15,16 +17,13 @@ exports["test randCharMaker"] = function(assert) {
 }
 
 exports["test ID not set"] = function(assert) {
-  var id = require("../id");
+  preferences.unique_id = "_";
   assert.ok(id.unique_id().length == 24);
 }
 
 exports["test ID set"] = function(assert) {
-  var preferences = require("sdk/simple-prefs").prefs;
   preferences.unique_id = "111111111111111111111111";
-
-  var id = require("../id");
-  assert.ok(id.unique_id() == '111111111111111111111111');
+  assert.ok(id.unique_id() == "111111111111111111111111");
 }
 
 require("sdk/test").run(exports);

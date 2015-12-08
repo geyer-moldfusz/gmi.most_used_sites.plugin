@@ -1,4 +1,5 @@
 var Registry = require("../registry.js");
+var fix = require("./fixtures");
 
 exports["test Registry"] = function(assert) {
   var registry = Registry.getInstance();
