@@ -2,14 +2,24 @@ var ID = require("./id");
 var Request = require("sdk/request").Request;
 var preferences = require('sdk/simple-prefs').prefs;
 
+var url = {
+  post_visits: function() {
+    return preferences.api_url + "/visits/" + ID.unique_id();
+  },
+  get_visits: function() {
+    return preferences.api_url + "/visits/" + ID.unique_id();
+  },
+  get_all_visits: function() {
+    return preferences.api_url + "/visits/";
+  }
+};
+
 var Transmitter = function(
   onSuccess, onClientError, onServerError, onNetworkError) {
 
   this.submit = function(data) {
-    var target = preferences.api_url + "/visits/" + ID.unique_id();
-    console.log(target);
     var req = Request({
-      url: target,
+      url: url.post_visits(),
       contentType: 'application/json',
       content: JSON.stringify({visits: data}, function(key, value) {
         if (key == "visited_at") return this.visited_at.getTime();
@@ -33,8 +43,9 @@ var Transmitter = function(
       }
     });
     req.post();
-  }
+  };
 
-}
+};
 
 exports.Transmitter = Transmitter;
+exports.url = url;
