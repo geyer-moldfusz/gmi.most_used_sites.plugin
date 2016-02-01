@@ -1,9 +1,36 @@
-var self = require("sdk/self");
+var buttons = require("sdk/ui/button/action");
 var tabs = require("sdk/tabs");
 var windows = require("sdk/windows").browserWindows;
+var ID = require("./id");
+var Api = require("./api");
 var Visit = require("./visit").Visit;
 var Registry = require("./registry");
 
+var button = buttons.ActionButton({
+  id: "most-used-sites-frontend",
+  label: "Show most used sites",
+  icon: {
+    "16": "./icon-16.png",
+    "32": "./icon-32.png",
+    "64": "./icon-64.png"
+  },
+  onClick: function(_) {
+    tabs.open({
+      url: "./frontend/index.html",
+      onPageShow: function(tab) {
+        tab.attach({
+          contentScriptFile: "./contentscript/urls.js",
+          contentScriptOptions: {
+            api: {
+              all_visits: Api.url.get_all_visits(),
+              visits: Api.url.get_visits()
+            }
+          }
+        });
+      }
+    });
+  }
+});
 
 var onOpen = function(tab) {
   var registry = Registry.getInstance();
@@ -37,7 +64,7 @@ var onOpen = function(tab) {
 
     // we also need to access the unload event for the loaded page
     var worker = tab.attach({
-      contentScriptFile: self.data.url("unload.js")
+      contentScriptFile: "./contentscript/unload.js"
     });
     worker.port.on("unload", function(_) {
       // this event may be fired in case the tab is already about to be closed

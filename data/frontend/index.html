@@ -1,0 +1,25 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+      d3.select(window).on("message", function(d, i) {
+        var api = d3.event.data;
+        d3.select("#my_visits").attr("href", api.visits);
+        d3.select("#all_visits").attr("href", api.all_visits);
+
+        d3.json(api.visits, function(error, root) {
+          if (error) throw error;
+
+          d3.select("#json").text(JSON.stringify(root));
+        });
+
+      });
+    </script>
+    <h1>Hallo Welt</h1>
+    <a id="my_visits" href="#">my visits</a>
+    <a id="all_visits" href="#">all visits</a>
+    <p id="json"></p>
+  </body>
+</html>

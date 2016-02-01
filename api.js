@@ -10,7 +10,7 @@ var url = {
     return preferences.api_url + "/visits/" + ID.unique_id();
   },
   get_all_visits: function() {
-    return preferences.api_url + "/visits/";
+    return preferences.api_url + "/visits";
   }
 };
 
