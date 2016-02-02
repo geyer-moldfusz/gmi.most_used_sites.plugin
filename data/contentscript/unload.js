@@ -1,3 +1,3 @@
-window.addEventListener("beforeunload", function() {
-  self.port.emit("unload", null);
-});
+//window.addEventListener("beforeunload", function() {
+//  self.port.emit("unload", null);
+//});

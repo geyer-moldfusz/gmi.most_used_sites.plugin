@@ -10,22 +10,17 @@ var button = buttons.ActionButton({
   id: "most-used-sites-frontend",
   label: "Show most used sites",
   icon: {
-    "16": "./icon-16.png",
-    "32": "./icon-32.png",
-    "64": "./icon-64.png"
+    "16": "./Logo_16.png",
+    "32": "./Logo_32.png",
+    "64": "./Logo_64.png"
   },
   onClick: function(_) {
     tabs.open({
-      url: "./frontend/index.html",
+      url: "http://localhost:8000/app/",
       onPageShow: function(tab) {
         tab.attach({
-          contentScriptFile: "./contentscript/urls.js",
-          contentScriptOptions: {
-            api: {
-              all_visits: Api.url.get_all_visits(),
-              visits: Api.url.get_visits()
-            }
-          }
+          contentScriptFile: "./contentscript/uuid.js",
+          contentScriptOptions: { uuid: ID.unique_id() }
         });
       }
     });
